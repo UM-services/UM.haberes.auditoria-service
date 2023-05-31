@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ar.edu.um.haberes.aud.rest.controller;
+package um.haberes.aud.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ar.edu.um.haberes.aud.rest.model.Log;
-import ar.edu.um.haberes.aud.rest.service.LogService;
+import um.haberes.aud.rest.model.Log;
+import um.haberes.aud.rest.service.LogService;
 
 /**
  * @author daniel

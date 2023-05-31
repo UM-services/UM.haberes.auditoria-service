@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ar.edu.um.haberes.aud.rest.model;
+package um.haberes.aud.rest.model;
 
 import java.time.LocalDateTime;
 

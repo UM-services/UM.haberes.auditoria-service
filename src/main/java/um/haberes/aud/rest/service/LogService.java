@@ -1,13 +1,13 @@
 /**
  * 
  */
-package ar.edu.um.haberes.aud.rest.service;
+package um.haberes.aud.rest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.um.haberes.aud.rest.model.Log;
-import ar.edu.um.haberes.aud.rest.repository.ILogRepository;
+import um.haberes.aud.rest.model.Log;
+import um.haberes.aud.rest.repository.ILogRepository;
 
 /**
  * @author daniel
