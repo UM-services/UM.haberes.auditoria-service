@@ -1,14 +1,13 @@
 app:
+  port: ${APP_PORT:8080}
+  logging: debug
   server: 10.147.20.25:3306
   database: haberes.aud
   user: root
   password: root
-  add-properties: true
-  logging: debug
-  livereload:
-    enabled: true
-    port: 35896
-  open-in-view: true
+
+server:
+  port: ${app.port}
 
 spring:
   datasource:
@@ -18,14 +17,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
-    open-in-view: ${app.open-in-view}
     hibernate:
       ddl-auto: none
-  devtools:
-    livereload:
-      enabled: ${app.livereload.enabled}
-      port: ${app.livereload.port}
-    add-properties: ${app.add-properties}
 
 logging:
   level:
