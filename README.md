@@ -6,15 +6,32 @@
 Servicio de auditoría para el sistema de haberes de la Universidad de Mendoza. Este microservicio se encarga de registrar y gestionar las operaciones de auditoría relacionadas con las transacciones y modificaciones en el sistema de haberes.
 
 ## Tecnologías
-- Java
-- Spring Boot
-- Maven
+- Java 21
+- Spring Boot 3.4.4
+- Maven 3.8.8
+- MySQL 9.2.0
+- SpringDoc OpenAPI 2.8.6
+- Lombok
+- Log4j2
 - GitHub Actions (CI/CD)
 
 ## Requisitos previos
-- Java JDK 11 o superior
-- Maven 3.6 o superior
+- Java JDK 21 o superior
+- Maven 3.8.8 o superior
+- MySQL 8.0 o superior
 - Docker (opcional)
+
+## Configuración
+El servicio requiere las siguientes variables de entorno o configuración en `application.yml`:
+```yaml
+app:
+  port: 8080
+  logging: debug
+  server: localhost:3306
+  database: haberes.aud
+  user: root
+  password: root
+```
 
 ## Instalación y configuración
 
@@ -53,11 +70,20 @@ El servicio expone endpoints REST para la gestión de auditorías. La documentac
 http://localhost:8080/swagger-ui.html
 ```
 
+### Endpoints disponibles
+- POST `/log/` - Registrar un nuevo log de auditoría
+
 ## Estructura del proyecto
 ```
 ├── src/
 │   ├── main/
 │   │   ├── java/
+│   │   │   └── um/haberes/aud/rest/
+│   │   │       ├── controller/
+│   │   │       ├── model/
+│   │   │       ├── repository/
+│   │   │       ├── service/
+│   │   │       └── configuration/
 │   │   └── resources/
 │   └── test/
 ├── .github/
@@ -65,6 +91,12 @@ http://localhost:8080/swagger-ui.html
 ├── pom.xml
 └── README.md
 ```
+
+## Logging
+El servicio utiliza Log4j2 para el manejo de logs con las siguientes características:
+- Logs diarios con rotación por tamaño (10MB)
+- Formato personalizado con timestamp, nivel, thread y mensaje
+- Almacenamiento en directorio `./logs`
 
 ## Contribución
 1. Fork el proyecto
