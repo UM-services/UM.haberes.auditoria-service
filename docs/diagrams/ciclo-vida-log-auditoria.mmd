@@ -1,0 +1,18 @@
+stateDiagram-v2
+    [*] --> Created: Log registrado
+    Created --> Stored: Persistido en DB
+    Stored --> Queried: Consultado por API
+    Queried --> [*]: Respuesta enviada
+
+    Stored --> Archived: Log archivado (opcional)
+    Archived --> [*]
+
+    note right of Created
+        Timestamp automático
+        Validación de datos
+    end note
+
+    note right of Stored
+        JPA/Hibernate
+        MySQL storage
+    end note

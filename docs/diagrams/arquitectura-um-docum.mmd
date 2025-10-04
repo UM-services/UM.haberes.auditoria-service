@@ -1,0 +1,27 @@
+graph TB
+    A[Cliente HTTP] --> B[Spring Security]
+    B --> C[Controller Layer]
+    C --> D[Service Layer]
+    D --> E[Repository Layer]
+    E --> F[JPA/Hibernate]
+    F --> G[MySQL Database]
+
+    H[Log4j2] --> I[Logs Files]
+    J[JaCoCo] --> K[Test Coverage]
+
+    L[Docker] --> M[Container Runtime]
+    M --> N[Kubernetes/Deployment]
+
+    subgraph "UM.haberes.auditoria-service"
+        B
+        C
+        D
+        E
+    end
+
+    subgraph "External Dependencies"
+        G
+        I
+        K
+        N
+    end

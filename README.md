@@ -6,17 +6,19 @@
 Servicio de auditoría para el sistema de haberes de la Universidad de Mendoza. Este microservicio se encarga de registrar y gestionar las operaciones de auditoría relacionadas con las transacciones y modificaciones en el sistema de haberes.
 
 ## Tecnologías
-- Java 21
-- Spring Boot 3.4.4
+- Java 25
+- Spring Boot 4.0.0-M3
 - Maven 3.8.8
-- MySQL 9.2.0
-- SpringDoc OpenAPI 2.8.6
+- MySQL 9.4.0
+- SpringDoc OpenAPI 3.0.0-M1
+- Spring Security
 - Lombok
 - Log4j2
-- GitHub Actions (CI/CD)
+- GitHub Actions (CI/CD con SonarCloud)
+- JaCoCo (cobertura de código)
 
 ## Requisitos previos
-- Java JDK 21 o superior
+- Java JDK 25 o superior
 - Maven 3.8.8 o superior
 - MySQL 8.0 o superior
 - Docker (opcional)
@@ -31,6 +33,21 @@ app:
   database: haberes.aud
   user: root
   password: root
+  swagger_user: admin
+  swagger_password: password
+
+server:
+  port: ${app.port}
+
+spring:
+  security:
+    user:
+      name: ${app.swagger_user}
+      password: ${app.swagger_password}
+  datasource:
+    url: jdbc:mysql://${app.server}/${app.database}?useSSL=false&serverTimezone=UTC
+    username: ${app.user}
+    password: ${app.password}
 ```
 
 ## Instalación y configuración
@@ -72,6 +89,8 @@ http://localhost:8080/swagger-ui.html
 
 ### Endpoints disponibles
 - POST `/log/` - Registrar un nuevo log de auditoría
+- GET `/log/` - Consultar logs de auditoría (con filtros opcionales)
+- GET `/log/{id}` - Consultar log específico por ID
 
 ## Estructura del proyecto
 ```
@@ -84,12 +103,21 @@ http://localhost:8080/swagger-ui.html
 │   │   │       ├── repository/
 │   │   │       ├── service/
 │   │   │       └── configuration/
+│   │   │           ├── AuditConfiguration.java
+│   │   │           └── SecurityConfig.java
 │   │   └── resources/
+│   │       ├── application.yml
+│   │       ├── banner.txt
+│   │       └── log4j2-spring.xml
 │   └── test/
 ├── .github/
+│   └── workflows/
+│       ├── ci.yml
+│       └── generate-docs.yml
 ├── .gitignore
 ├── pom.xml
-└── README.md
+├── README.md
+└── CHANGELOG.md
 ```
 
 ## Logging
