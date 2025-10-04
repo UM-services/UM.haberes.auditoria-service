@@ -1,0 +1,21 @@
+erDiagram
+    LOG_AUDITORIA {
+        BIGINT id PK
+        VARCHAR(255) usuario
+        VARCHAR(255) operacion
+        VARCHAR(500) descripcion
+        TIMESTAMP fecha_creacion
+        TIMESTAMP fecha_modificacion
+    }
+
+    AUDITABLE {
+        BIGINT id PK
+        VARCHAR(255) entidad
+        BIGINT entidad_id
+        VARCHAR(255) campo_modificado
+        VARCHAR(500) valor_anterior
+        VARCHAR(500) valor_nuevo
+        TIMESTAMP fecha_auditoria
+    }
+
+    LOG_AUDITORIA ||--o{ AUDITABLE : contiene

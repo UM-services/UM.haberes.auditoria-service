@@ -1,0 +1,16 @@
+flowchart TD
+    A[Request] --> B{Authentication?}
+    B -->|No| C[401 Unauthorized]
+    B -->|Yes| D{Validation}
+    D -->|Invalid| E[400 Bad Request]
+    D -->|Valid| F{Database Operation}
+    F -->|Success| G[200/201 OK]
+    F -->|DB Error| H[500 Internal Server Error]
+    F -->|Constraint Violation| I[409 Conflict]
+
+    C --> J[Log Error]
+    E --> J
+    H --> J
+    I --> J
+
+    J --> K[Return Error Response]

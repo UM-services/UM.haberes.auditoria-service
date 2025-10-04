@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant Client
+    participant SecurityFilter
+    participant LogController
+    participant LogService
+    participant LogRepository
+    participant Database
+
+    Client->>SecurityFilter: POST /log/ (with auth)
+    SecurityFilter->>SecurityFilter: Validate credentials
+    SecurityFilter->>LogController: Forward request
+
+    LogController->>LogService: createLog(logData)
+    LogService->>LogService: Validate data
+    LogService->>LogRepository: save(log)
+    LogRepository->>Database: INSERT INTO log_auditoria
+    Database-->>LogRepository: Success
+    LogRepository-->>LogService: Log entity
+    LogService-->>LogController: Response
+    LogController-->>Client: 201 Created
+
+    Note over Client,Database: Similar flow for GET endpoints

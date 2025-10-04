@@ -1,0 +1,22 @@
+graph TB
+    subgraph "Docker Host"
+        A[Docker Container<br/>um.haberes.auditoria-service<br/>Port: 8080]
+        B[MySQL Container<br/>Port: 3306]
+    end
+
+    subgraph "External Services"
+        C[GitHub Actions CI/CD]
+        D[SonarCloud]
+        E[Docker Hub]
+    end
+
+    A --> B
+    C --> D
+    C --> E
+    E --> A
+
+    F[Developer] --> G[Git Push]
+    G --> C
+
+    H[User] --> I[HTTP Request]
+    I --> A

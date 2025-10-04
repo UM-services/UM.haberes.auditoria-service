@@ -5,11 +5,17 @@ app:
   database: haberes.aud
   user: root
   password: root
+  swagger_user: admin
+  swagger_password: password
 
 server:
   port: ${app.port}
 
 spring:
+  security:
+    user:
+      name: ${app.swagger_user}
+      password: ${app.swagger_password}
   datasource:
     url: jdbc:mysql://${app.server}/${app.database}?useSSL=false&serverTimezone=UTC
     username: ${app.user}
