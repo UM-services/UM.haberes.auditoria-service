@@ -5,6 +5,15 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-02-02
+
+### Cambiado
+- build: Actualizado Spring Boot de 4.0.0-M3 a 4.0.2
+- build: Actualizado MySQL Connector/J de 9.4.0 a 9.6.0
+- build: Actualizado SpringDoc OpenAPI de 3.0.0-M1 a 3.0.1
+- build: Actualizado Apache Commons Lang3 de 3.19.0 a 3.20.0
+- build: Eliminada configuración executable del Spring Boot Maven Plugin
+
 ## [0.1.0] - 2025-10-04
 
 ### Agregado

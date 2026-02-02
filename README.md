@@ -7,10 +7,10 @@ Servicio de auditoría para el sistema de haberes de la Universidad de Mendoza. 
 
 ## Tecnologías
 - Java 25
-- Spring Boot 4.0.0-M3
+- Spring Boot 4.0.2
 - Maven 3.8.8
-- MySQL 9.4.0
-- SpringDoc OpenAPI 3.0.0-M1
+- MySQL 9.6.0
+- SpringDoc OpenAPI 3.0.1
 - Spring Security
 - Lombok
 - Log4j2
