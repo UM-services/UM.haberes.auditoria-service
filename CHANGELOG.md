@@ -5,6 +5,22 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2026-04-04
+
+### Cambiado
+- build: Actualizado Spring Boot de 4.0.2 a 4.0.5
+- build: Actualizado SpringDoc OpenAPI de 3.0.1 a 3.0.2
+- ci: Actualizado actions/checkout de v4 a v6
+- ci: Actualizado actions/setup-java de v4 a v5
+- ci: Actualizado actions/cache de v4 a v5
+- ci: Actualizado actions/upload-pages-artifact de v3 a v4
+- ci: Actualizado actions/deploy-pages de v4 a v5
+- ci: Actualizado docker/login-action de v3 a v4
+- ci: Actualizado docker/metadata-action de v5 a v6
+- ci: Actualizado docker/setup-buildx-action de v3 a v4
+- ci: Actualizado docker/build-push-action de v6 a v7
+- ci: Eliminados comentarios de documentación en maven.yml
+
 ## [0.1.1] - 2026-02-02
 
 ### Cambiado

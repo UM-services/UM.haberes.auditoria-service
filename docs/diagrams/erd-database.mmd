@@ -4,8 +4,8 @@ erDiagram
         VARCHAR(255) usuario
         VARCHAR(255) operacion
         VARCHAR(500) descripcion
-        TIMESTAMP fecha_creacion
-        TIMESTAMP fecha_modificacion
+        TIMESTAMP created
+        TIMESTAMP updated
     }
 
     AUDITABLE {
@@ -15,7 +15,8 @@ erDiagram
         VARCHAR(255) campo_modificado
         VARCHAR(500) valor_anterior
         VARCHAR(500) valor_nuevo
-        TIMESTAMP fecha_auditoria
+        TIMESTAMP created
+        TIMESTAMP updated
     }
 
     LOG_AUDITORIA ||--o{ AUDITABLE : contiene
