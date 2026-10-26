@@ -1,22 +1,27 @@
 erDiagram
-    LOG_AUDITORIA {
-        BIGINT id PK
-        VARCHAR(255) usuario
-        VARCHAR(255) operacion
-        VARCHAR(500) descripcion
-        TIMESTAMP created
-        TIMESTAMP updated
+    AUDIT_EVENT {
+        char event_id PK
+        datetime occurred_at
+        datetime received_at
+        varchar correlation_id
+        varchar service
+        varchar level
+        varchar operation
+        varchar entity
+        varchar entity_id
+        varchar actor_type
+        bigint actor_id
+        varchar actor_login
+        varchar actor_trust
+        varchar client_ip
+        varchar http_method
+        varchar endpoint
+        varchar outcome
+        smallint http_status
+        int affected_rows
+        json changed_fields
+        json before_data
+        json after_data
+        char payload_hash
+        json metadata
     }
-
-    AUDITABLE {
-        BIGINT id PK
-        VARCHAR(255) entidad
-        BIGINT entidad_id
-        VARCHAR(255) campo_modificado
-        VARCHAR(500) valor_anterior
-        VARCHAR(500) valor_nuevo
-        TIMESTAMP created
-        TIMESTAMP updated
-    }
-
-    LOG_AUDITORIA ||--o{ AUDITABLE : contiene
