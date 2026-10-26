@@ -1,18 +1,22 @@
 stateDiagram-v2
-    [*] --> Created: Log registrado
-    Created --> Stored: Persistido en DB
-    Stored --> Queried: Consultado por API
-    Queried --> [*]: Respuesta enviada
+    [*] --> Recibido: POST /evento o /lote
+    Recibido --> Rechazado: API key inválida
+    Recibido --> Validado: Payload válido
+    Recibido --> Rechazado: Payload inválido
+    Validado --> Almacenado: INSERT append-only
+    Validado --> Duplicado: eventId ya existe
+    Almacenado --> Consultado: GET /evento/{eventId}
+    Consultado --> [*]: Respuesta 200
+    Duplicado --> [*]: Se omite en el lote
+    Rechazado --> [*]: Error 400/401/503
 
-    Stored --> Archived: Log archivado (opcional)
-    Archived --> [*]
-
-    note right of Created
-        Timestamp automático
-        Validación de datos
+    note right of Validado
+        occurredAt con desvío máximo 5 min
+        entity obligatorio para CHANGE/SUMMARY
+        affectedRows mayor a 0 para BULK
     end note
 
-    note right of Stored
-        JPA/Hibernate
-        MySQL storage
+    note right of Almacenado
+        receivedAt lo pone el servidor
+        payload_hash SHA-256 canónico
     end note

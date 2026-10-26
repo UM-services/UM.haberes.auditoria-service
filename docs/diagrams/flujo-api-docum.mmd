@@ -1,22 +1,24 @@
 sequenceDiagram
-    participant Client
-    participant SecurityFilter
-    participant LogController
-    participant LogService
-    participant LogRepository
-    participant Database
+    autonumber
+    actor Client as haberes-core
+    participant Filter as AuditApiKeyFilter
+    participant Controller as AuditEventController
+    participant Service as AuditEventService
+    participant Repo as IAuditEventRepository
+    participant DB as MySQL
 
-    Client->>SecurityFilter: POST /log/ (with auth)
-    SecurityFilter->>SecurityFilter: Validate credentials
-    SecurityFilter->>LogController: Forward request
-
-    LogController->>LogService: createLog(logData)
-    LogService->>LogService: Validate data
-    LogService->>LogRepository: save(log)
-    LogRepository->>Database: INSERT INTO log_auditoria
-    Database-->>LogRepository: Success
-    LogRepository-->>LogService: Log entity
-    LogService-->>LogController: Response
-    LogController-->>Client: 201 Created
-
-    Note over Client,Database: Similar flow for GET endpoints
+    Client->>Filter: POST /api/haberes/auditoria/evento/lote<br/>X-API-Key
+    alt Clave ausente o inválida
+        Filter-->>Client: 401 Unauthorized
+    else Clave válida
+        Filter->>Controller: Continuar request
+        Controller->>Service: ingest(AuditBatchRequest)
+        Service->>Repo: findAllByEventIdIn(eventIds)
+        Repo->>DB: SELECT audit_event
+        DB-->>Repo: Eventos existentes
+        Service->>Service: Validar y deduplicar
+        Service->>Repo: saveAll(eventos nuevos)
+        Repo->>DB: INSERT audit_event
+        Service-->>Controller: AuditBatchResponse
+        Controller-->>Client: 202 Accepted
+    end
