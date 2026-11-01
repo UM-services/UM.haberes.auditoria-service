@@ -15,12 +15,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // API servicio-a-servicio sin sesiones: no aplica CSRF.
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").authenticated()
+                        .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").authenticated()
+                        // La escritura la protege AuditApiKeyFilter; la lectura es interna por ahora.
                         .anyRequest().permitAll()
                 )
                 .httpBasic(withDefaults());
         return http.build();
     }
-
 }

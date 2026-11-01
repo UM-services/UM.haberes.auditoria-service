@@ -37,4 +37,4 @@ COPY --from=build /app/target/um.haberes.auditoria-service.jar ./um.haberes.audi
 USER appuser
 
 # Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "um.haberes.auditoria-service.jar"]
+ENTRYPOINT ["java", "-Duser.timezone=UTC", "-jar", "um.haberes.auditoria-service.jar"]

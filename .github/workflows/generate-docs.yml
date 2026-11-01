@@ -109,6 +109,13 @@ jobs:
           cat >> docs/index.html << 'EOF'
           <script src="data.js"></script>
           <script>
+              // El contenido .mmd se inyecta con innerHTML: escapar HTML evita que el
+              // parser del navegador convierta anotaciones como <<interface>> en etiquetas.
+              const escapeHtml = (text) => text
+                  .replace(/&/g, '&amp;')
+                  .replace(/</g, '&lt;')
+                  .replace(/>/g, '&gt;');
+
               // --- Dependency Tree ---
               fetch('dependency-tree.txt')
                   .then(response => response.text())
@@ -134,7 +141,7 @@ jobs:
                   .then(response => response.text())
                   .then(data => {
                       const architectureContainer = document.getElementById('architecture');
-                      architectureContainer.innerHTML = '<h2>🏛️ Arquitectura del Servicio UM.docum.core-service</h2><div class="mermaid">' + data + '</div>';
+                      architectureContainer.innerHTML = '<h2>🏛️ Arquitectura del Servicio de Auditoría</h2><div class="mermaid">' + escapeHtml(data) + '</div>';
                       mermaid.init(undefined, architectureContainer.querySelector('.mermaid'));
                   });
 
@@ -143,7 +150,7 @@ jobs:
                   .then(response => response.text())
                   .then(data => {
                       const sequenceContainer = document.getElementById('sequence-diagram');
-                      sequenceContainer.innerHTML = '<h2>🔄 Diagrama de Secuencia: Interacción con API</h2><div class="mermaid">' + data + '</div>';
+                      sequenceContainer.innerHTML = '<h2>🔄 Diagrama de Secuencia: Ingesta de Eventos</h2><div class="mermaid">' + escapeHtml(data) + '</div>';
                       mermaid.init(undefined, sequenceContainer.querySelector('.mermaid'));
                   });
 
@@ -152,7 +159,7 @@ jobs:
                   .then(response => response.text())
                   .then(data => {
                       const stateContainer = document.getElementById('state-diagram');
-                      stateContainer.innerHTML = '<h2>🚦 Diagrama de Estado: Ciclo de Vida del Log de Auditoría</h2><div class="mermaid">' + data + '</div>';
+                      stateContainer.innerHTML = '<h2>🚦 Diagrama de Estado: Ciclo de Vida del Evento de Auditoría</h2><div class="mermaid">' + escapeHtml(data) + '</div>';
                       mermaid.init(undefined, stateContainer.querySelector('.mermaid'));
                   });
 
@@ -161,7 +168,7 @@ jobs:
                   .then(response => response.text())
                   .then(data => {
                       const erdContainer = document.getElementById('erd-diagram');
-                      erdContainer.innerHTML = '<h2>🗃️ Diagrama de Entidad-Relación (Base de Datos)</h2><div class="mermaid">' + data + '</div>';
+                      erdContainer.innerHTML = '<h2>🗃️ Diagrama de Entidad-Relación (Base de Datos)</h2><div class="mermaid">' + escapeHtml(data) + '</div>';
                       mermaid.init(undefined, erdContainer.querySelector('.mermaid'));
                   });
 
@@ -170,7 +177,7 @@ jobs:
                   .then(response => response.text())
                   .then(data => {
                       const errorContainer = document.getElementById('error-flow-diagram');
-                      errorContainer.innerHTML = '<h2>⚠️ Diagrama de Secuencia: Manejo de Errores</h2><div class="mermaid">' + data + '</div>';
+                      errorContainer.innerHTML = '<h2>⚠️ Diagrama de Flujo: Manejo de Errores</h2><div class="mermaid">' + escapeHtml(data) + '</div>';
                       mermaid.init(undefined, errorContainer.querySelector('.mermaid'));
                   });
 
@@ -179,7 +186,7 @@ jobs:
                   .then(response => response.text())
                   .then(data => {
                       const deploymentContainer = document.getElementById('deployment-diagram');
-                      deploymentContainer.innerHTML = '<h2>🚀 Diagrama de Despliegue</h2><div class="mermaid">' + data + '</div>';
+                      deploymentContainer.innerHTML = '<h2>🚀 Diagrama de Despliegue</h2><div class="mermaid">' + escapeHtml(data) + '</div>';
                       mermaid.init(undefined, deploymentContainer.querySelector('.mermaid'));
                   });
           

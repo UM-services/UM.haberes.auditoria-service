@@ -1,22 +1,23 @@
-graph TB
-    subgraph "Docker Host"
-        A[Docker Container<br/>um.haberes.auditoria-service<br/>Port: 8080]
-        B[MySQL Container<br/>Port: 3306]
+flowchart TB
+    subgraph DockerHost["Docker Host"]
+        A["um.haberes.auditoria-service<br/>puerto 8210"]
+        B["MySQL<br/>haberes_aud<br/>puerto 3306"]
     end
 
-    subgraph "External Services"
-        C[GitHub Actions CI/CD]
-        D[SonarCloud]
-        E[Docker Hub]
+    subgraph Platform["Plataforma UM"]
+        C["Consul<br/>service registry"]
+        G["Gateway de haberes<br/>/api/haberes/auditoria/**"]
     end
 
-    A --> B
-    C --> D
-    C --> E
+    subgraph CICD["CI/CD"]
+        D["GitHub Actions"]
+        E["Docker Hub"]
+    end
+
+    Developer["Developer"] --> F["git push"]
+    F --> D
+    D --> E
     E --> A
-
-    F[Developer] --> G[Git Push]
-    G --> C
-
-    H[User] --> I[HTTP Request]
-    I --> A
+    G --> A
+    A --> B
+    A --> C

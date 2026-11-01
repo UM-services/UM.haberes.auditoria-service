@@ -1,16 +1,15 @@
 flowchart TD
-    A[Request] --> B{Authentication?}
-    B -->|No| C[401 Unauthorized]
-    B -->|Yes| D{Validation}
-    D -->|Invalid| E[400 Bad Request]
-    D -->|Valid| F{Database Operation}
-    F -->|Success| G[200/201 OK]
-    F -->|DB Error| H[500 Internal Server Error]
-    F -->|Constraint Violation| I[409 Conflict]
-
-    C --> J[Log Error]
-    E --> J
-    H --> J
-    I --> J
-
-    J --> K[Return Error Response]
+    A["Request HTTP"] --> B{"¿Ruta de escritura?"}
+    B -->|"Sí"| C{"¿API key configurada?"}
+    C -->|"No"| D["503 Service Unavailable"]
+    C -->|"Sí"| E{"¿X-API-Key válida?"}
+    E -->|"No"| F["401 Unauthorized"]
+    E -->|"Sí"| G{"¿Payload válido?"}
+    B -->|"No"| G
+    G -->|"No"| H["400 Bad Request<br/>ProblemDetail"]
+    G -->|"Sí"| I{"¿Persistencia o consulta exitosa?"}
+    I -->|"Conflicto"| J["409 Conflict<br/>ProblemDetail"]
+    I -->|"No encontrado"| K["404 Not Found<br/>ProblemDetail"]
+    I -->|"Sí"| L{"¿Escritura?"}
+    L -->|"Sí"| M["202 Accepted"]
+    L -->|"No"| N["200 OK"]
