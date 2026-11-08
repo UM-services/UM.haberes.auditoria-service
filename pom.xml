@@ -10,7 +10,7 @@
     </parent>
     <groupId>ar.edu</groupId>
     <artifactId>um.haberes.aud.rest</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>um.haberes.aud.rest</name>
     <description>Demo project for Spring Boot</description>
     <properties>
