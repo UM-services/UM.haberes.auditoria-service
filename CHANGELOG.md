@@ -5,6 +5,14 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-11-08
+
+### Cambiado
+- test: la configuración del contexto de test pasa de `application.properties` a `application.yml`
+  (datasource H2 en memoria, Hibernate `create-drop`, Consul/Discovery deshabilitados y
+  `app.api-key=test-key`), sin cambios en el comportamiento de los tests ni en la API pública
+  (basado en `src/test/resources/application.yml` y `git diff HEAD`).
+
 ## [1.0.0] - 2026-10-26
 
 ### Agregado
