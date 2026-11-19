@@ -1,11 +1,20 @@
 # Um.haberes.auditoria-service
 
 [![UM.haberes.aud.rest CI](https://github.com/UM-services/UM.haberes.auditoria-service/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/UM-services/UM.haberes.auditoria-service/actions/workflows/maven.yml)
+![Java](https://img.shields.io/badge/Java-25-ED8B00?logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.2-6DB33F?logo=springboot&logoColor=white)
+![Spring Cloud](https://img.shields.io/badge/Spring%20Cloud-2025.1.4-6DB33F?logo=spring&logoColor=white)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?logo=springsecurity&logoColor=white)
+![MySQL Connector/J](https://img.shields.io/badge/MySQL%20Connector%2FJ-26.10.0-4479A1?logo=mysql&logoColor=white)
+![SpringDoc OpenAPI](https://img.shields.io/badge/SpringDoc%20OpenAPI-3.1.1-blue)
+![Log4j2](https://img.shields.io/badge/Log4j2-red)
+![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?logo=apachemaven&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
 
 ## Descripción
 Servicio de auditoría para el sistema de haberes de la Universidad de Mendoza. Este microservicio se encarga de registrar y gestionar las operaciones de auditoría relacionadas con las transacciones y modificaciones en el sistema de haberes.
 
-Versión actual: **1.0.0** (ver [CHANGELOG.md](CHANGELOG.md)).
+Versión actual: **1.0.1** (ver [CHANGELOG.md](CHANGELOG.md)).
 
 ## Tecnologías
 - Java 25
@@ -195,10 +204,11 @@ buscador compuesto permite filtrar por `level` y `operation`.
 ```
 
 ## Logging
-El servicio utiliza Log4j2 para el manejo de logs con las siguientes características:
-- Logs diarios con rotación por tamaño (10MB)
-- Formato personalizado con timestamp, nivel, thread y mensaje
-- Almacenamiento en directorio `./logs`
+El servicio usa Log4j2 (`spring-boot-starter-log4j2`, con `spring-boot-starter-logging` excluido).
+El repositorio no incluye un archivo de configuración de Log4j2 (`src/main/resources` sólo contiene
+`banner.txt` y `bootstrap.yml`), por lo que la salida y el formato quedan a cargo de la configuración
+por defecto de Spring Boot. El nivel se controla con la variable `APP_LOGGING` (mapeada a
+`app.logging` en `bootstrap.yml`).
 
 ## Contribución
 1. Fork el proyecto
